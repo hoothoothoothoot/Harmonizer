@@ -9,6 +9,9 @@ from csvManager import CSV
 '''
 Author : hoot
 
+github : https://github.com/rabesonw/
+project github : https://github.com/rabesonw/Harmonizer
+
 Harmonizer is part of the Bayesian Peer Review project. 
 
 This class computes probabilities of having a grade given reviews from markers, following the bayes theorem :
