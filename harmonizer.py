@@ -199,9 +199,9 @@ class Harmonizer(object):
 
 		return numerator * N
 
-	def computeWithOneMarker(self, marker):
+	def computeWithOneMarker(self, markers):
 		'''
-		Computes the probability of having @list papergrades given reviews of @param marker
+		Computes the probability of having @list papergrades given reviews of @param markers
 		or for each grade in @list papergrades we have :
 		p(grade1 | r1, r2, .., rn)
 		p(grade2 | r1, r2, .., rn)
@@ -212,7 +212,7 @@ class Harmonizer(object):
 		@see self.getValuesOfPaperGrades
 		@see self.compute
 		'''
-		marks = self.getPaperReviews(marker)
+		marks = self.getPaperReviews(markers)
 		papergrades = self.getValuesOfPaperGrades()
 
 		probs = []
