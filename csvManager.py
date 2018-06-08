@@ -87,7 +87,9 @@ class CSV(object):
 		fd = open(self.output, 'w', newline='')
 		file = csv.writer(fd, dialect='excel', delimiter=',', quotechar='"')
 		for i in range(len(harmonizer.paper.grades)):
-			file.writerow([harmonizer.getGroundTruthAll()[i][0]]+[str(harmonizer.defineAvgOfReviews(i+1))]+self.extractGradesRows()[i])
+			file.writerow([harmonizer.getGroundTruthAll()[i][0]]
+				+[str(harmonizer.defineAvgOfReviews(i+1))]
+				+self.extractGradesRows()[i])
 
 	def extractData(self):
 		'''
