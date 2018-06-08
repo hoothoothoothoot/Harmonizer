@@ -67,10 +67,15 @@ class Gui(object):
 		Store path of file in self.Entry
 		'''
 		Tk().withdraw()
+
+		# opens dialog page to select file
 		self.file_path_in = filedialog.askopenfilename()
+
+		# check if file is CSV format
 		if ".csv" in self.file_path_in:
 			self.app.setEntry("Select input file *", self.file_path_in, False)
 		else:
+			# if not CSV opens errorBox
 			self.app.errorBox("WRONG INPUT FILE", "Please select a CSV file")
 
 	def selectOutputFile(self):
@@ -79,10 +84,13 @@ class Gui(object):
 		Store path of file in self.Entry
 		'''
 		Tk().withdraw()
+		
+		# opens dialog page to select file
 		self.file_path_out = filedialog.askopenfilename()
 		if ".csv" in self.file_path_out:
 			self.app.setEntry("Select output file ", self.file_path_out, False)
 		else:
+			# if not CSV opens errorBox
 			self.app.errorBox("WRONG INPUT FILE", "Please select a CSV file")
 
 	def clear(self):
@@ -134,20 +142,32 @@ class Gui(object):
 
 		@see self.main
 		'''
+		# creates the header cells with "Actual grade", "Average"
+		# and the number of markers for each paper
 		tab = ["Actual grade", "Average"]
 		for i in range(self.harm.nmarkers):
 			tab.append("Marker "+str(i+1))
+
+		# setting preferencies for the page display
 		self.app.startSubWindow("Results")
 		self.app.setSize(Q_SCREEN_SIZE)
 		self.app.setTtkTheme(THEME)
 		self.app.setPadding([10,10])
 		self.app.setSticky("news")
+
+		# adding a module Grid with the header cells
 		self.app.addGrid("Grid", [tab], 0, 0, 2)
+
+		# filling the grid with the informations from the CSV file
 		for line in self.harm.data:
 			self.app.addGridRow("Grid", line)
+
+		# changing the layout for the buttons
 		self.app.setSticky("")
 		self.app.setPadding([5,10])
 		self.app.setInPadding([20,5])
+
+		# adding buttons
 		self.app.addButton("OK", self.close, 1, 0, 1)
 		self.app.addButton("Details", self.displayCalcs, 1, 1, 1)
 		self.app.showSubWindow("Results")
@@ -167,17 +187,27 @@ class Gui(object):
 		@see self.displayResults
 		'''
 		self.app.startSubWindow("Calculations")
+
+		# adding the layout for the page
 		self.app.setSize(HALF_SCREEN_SIZE)
 		self.app.setTtkTheme(THEME)
 		self.app.setPadding([10, 10])
 		self.app.setSticky("news")
+
+		# creates the header for the grid and adding it to the new grid
 		self.app.addGrid("Grid2", [["Probabilities"]])
+
+		# filling the grid with the calculations
 		for group in self.harm.toPrint():
 			for line in group:
 				self.app.addGridRow("Grid2", [line])
+
+		# changing the layout for the button
 		self.app.setSticky("")
 		self.app.setPadding([5,10])
 		self.app.setInPadding([20,5])
+
+		# adding the button that will close the page
 		self.app.addButton("Done", self.closeCalcs)
 		self.app.showSubWindow("Calculations")
 
